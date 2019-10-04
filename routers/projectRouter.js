@@ -2,6 +2,7 @@ const express = require("express");
 const Projects = require("../data/helpers/projectModel");
 const Actions = require("../data/helpers/actionModel");
 const router = express.Router();
+router.use(express.json());
 
 //Endpoints
 
@@ -32,7 +33,7 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  const { id } = req.params.id;
+  const id = req.params.id;
 
   if (!id) {
     res.status(404).json({ error: "That project doesn't even exist" });
@@ -47,10 +48,10 @@ router.delete("/:id", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  const { id } = req.params.id;
+  const id = req.params.id;
   Projects.update(id, req.body)
     .then(project => {
-      if (project) {
+      if (id) {
         res.status(200).json(project);
       } else {
         res.status(404).json({ message: "Project does not exist." });
