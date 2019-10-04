@@ -57,8 +57,7 @@ router.put("/:id", (req, res) => {
         res.status(404).json({ message: "Project does not exist." });
       }
     })
-    .catch(err => {
-      console.log(err);
+    .catch(() => {
       res.status(500).json({ message: "Server could not update." });
     });
 });
